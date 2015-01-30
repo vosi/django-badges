@@ -79,10 +79,13 @@ class MetaBadge(object):
         self.award_ceremony(i)
     
     def _test_conditions(self, instance):
-        condition_callbacks = [getattr(self, c) for c in dir(self) if c.startswith('check')]
+        # added so we skip checking badges already earned!
+        if not BadgeToUser.objects.filter(user=instance, badge=self.badge).count():
+            condition_callbacks = [getattr(self, c) for c in dir(self) if c.startswith('check')]
         
-        # will return False on the first False condition
-        return all( fn(instance) for fn in condition_callbacks )
+            # will return False on the first False condition
+            return all( fn(instance) for fn in condition_callbacks )
+        return  # return if we already earned that badge
     
     def get_user(self, instance):
         return instance.user

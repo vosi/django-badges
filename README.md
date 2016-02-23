@@ -1,12 +1,19 @@
 [![travis ci](https://travis-ci.org/jiaaro/django-badges.png)](https://travis-ci.org/jiaaro/django-badges)
 
+Edit by falc410: Changed some parts to make it compatible to Django 1.7 and
+possible optimized by skipping already earned badges.
+Since I just started using badges in my 1.7 App, my 'fixes' might actually break stuff.
+So beware!
+
 ## How to install
 
  1. Put the "badges" directory somewhere in your python path
 
  2. Add "badges" to your installed apps (in the settings.py file)
 
- 3. OPTIONAL: If you want to use the pre-made badges overview/checklist page, add this to your main "urls.py" file:
+ 3. Add 'django.contrib.humanize' to your installed apps (in settings.py) if not already there
+
+ 4. OPTIONAL: If you want to use the pre-made badges overview/checklist page, add this to your main "urls.py" file:
     
     urlpatterns += patterns('',
         (r'^badges/', include('badges.urls')),
